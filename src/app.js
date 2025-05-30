@@ -23,7 +23,7 @@ import cors from 'cors';
 const allowedOrigins = [
   'http://localhost:3000',             // local React dev
   'http://localhost:5173',             // local Vite dev
-  'https://your-frontend.vercel.app',  // ✅ production frontend URL
+  'https://campus-security-five.vercel.app/',  // ✅ production frontend URL
 ];
 
 app.use(cors({
