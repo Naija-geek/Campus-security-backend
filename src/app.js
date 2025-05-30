@@ -18,8 +18,24 @@ connectDB();
 
 const app = express();
 
+import cors from 'cors';
+
+const allowedOrigins = [
+  'http://localhost:3000',             // local React dev
+  'http://localhost:5173',             // local Vite dev
+  'https://your-frontend.vercel.app',  // ✅ production frontend URL
+];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
